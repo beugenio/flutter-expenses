@@ -14,26 +14,40 @@ class ExpensesApp extends StatelessWidget{
 }
 
 class MyHomePage extends StatelessWidget{
+  
 
   @override 
   Widget build (BuildContext context){
     return Scaffold(
       appBar: AppBar(
         title: Text('Despesas Pessoais'),
-      ),
-      body: Column(
-        
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          Container(
-            child: Card(
-              child: Text('Gráfico'),
-              elevation: 6,
-            ),
-          ),
-          TransactionUser(),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.account_balance_wallet), 
+            onPressed: (){},
+          )
         ],
       ),
+      body: SingleChildScrollView(
+              child: Column(
+          
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            Container(
+              child: Card(
+                child: Text('Gráfico'),
+                elevation: 6,
+              ),
+            ),
+            TransactionUser(),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.account_balance_wallet),
+        onPressed: (){},
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
