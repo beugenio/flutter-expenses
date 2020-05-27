@@ -14,8 +14,9 @@ class ExpensesApp extends StatelessWidget{
     return MaterialApp(
       home: MyHomePage(),
       theme: ThemeData(
-        primarySwatch: Colors.purple,
-        accentColor: Colors.amber,
+        primarySwatch: Colors.deepPurple,
+        accentColor: Colors.purple,
+        fontFamily: 'OpenSans',
       ),
 
     );
@@ -30,8 +31,8 @@ class MyHomePage extends StatefulWidget{
 
 class _MyHomePageState extends State<MyHomePage> {
 
-     final _transactions = [
-    Transaction(
+     final List<Transaction> _transactions = [
+    /* Transaction(
       id: 't1',
       title: 'Bota creek para o chile',
       value: 56.00,
@@ -42,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
       title: 'Conta de luz 0',
       value: 123.00,
       date: DateTime.now()
-    ),
+    ), */
   ];
 
    _addTransaction(String title, double value){
