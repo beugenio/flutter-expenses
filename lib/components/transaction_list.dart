@@ -15,13 +15,16 @@ class TransactionList extends StatelessWidget {
         ? LayoutBuilder(builder: (ctx, constraints) {
             return Column(
               children: <Widget>[
-                SizedBox(height: 20),
-                Text(
-                  'Nenhuma transação cadastrada',
+                SizedBox(height: constraints.maxHeight * 0.05),
+                Container(
+                  height: constraints.minHeight * 0.3,
+                  child: Text(
+                    'Nenhuma transação cadastrada',
+                  ),
                 ),
                 Container(
                   height: constraints.maxHeight * 0.6,
-                  margin: EdgeInsets.only(top: 20),
+                  margin: EdgeInsets.only(top: constraints.maxHeight * 0.05),
                   child: Image.asset(
                     'assets/images/waiting.png',
                     fit: BoxFit.cover,
@@ -59,11 +62,18 @@ class TransactionList extends StatelessWidget {
                   subtitle: Text(
                     DateFormat('d MMM y').format(tr.date),
                   ),
-                  trailing: IconButton(
-                    icon: Icon(Icons.delete),
-                    onPressed: () => onRemove(tr.id),
-                    color: Theme.of(context).errorColor,
-                  ),
+                  trailing: MediaQuery.of(context).size.width > 400
+                      ? TextButton.icon(
+                          onPressed: () => onRemove(tr.id),
+                          label: Text('Excluir'),
+                          icon: Icon(Icons.delete),
+                          style: TextButton.styleFrom(
+                              primary: Theme.of(context).errorColor))
+                      : IconButton(
+                          icon: Icon(Icons.delete),
+                          onPressed: () => onRemove(tr.id),
+                          color: Theme.of(context).errorColor,
+                        ),
                 ),
               );
             });
