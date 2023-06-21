@@ -14,11 +14,6 @@ class ExpensesApp extends StatelessWidget {
     final ThemeData theme = ThemeData();
     return MaterialApp(
       home: MyHomePage(),
-      //theme: ThemeData(
-      //  primarySwatch: Colors.deepPurple,
-      //  accentColor: Colors.purple,
-      //  fontFamily: 'OpenSans',
-      //),
       theme: theme.copyWith(
           colorScheme: theme.colorScheme.copyWith(
             primary: Colors.deepPurple,
@@ -34,9 +29,27 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   final List<Transaction> _transactions = [];
   bool _showChart = false;
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance!.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    super.didChangeAppLifecycleState(state);
+    print(state);
+  }
 
   List<Transaction> get _recentTransactions {
     return _transactions.where((tr) {
